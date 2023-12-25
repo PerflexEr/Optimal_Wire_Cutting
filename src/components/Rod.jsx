@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { TextField, Typography,Fab , Box , Button} from '@mui/material';
+import { TextField, Typography,Fab , Box , Button, useTheme } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { observer } from 'mobx-react-lite';
 import { Context } from "../index";
@@ -34,13 +34,15 @@ const RodComponent = observer(() => {
   const handleCutting = () => {
     const prices = Object.values(rodSettings._rodPrice);
     const result = cut(rodSettings._rodLength, prices);
+    
     console.log(`Maximum profit for rod of length ${rodSettings._rodLength}: ${result.maxProfit}`);
     console.log(`The rod was cut into lengths of: ${result.lengths.join(", ")}`);
   };
 
+  const theme = useTheme();
 
   return (
-    <Box>
+    <Box style={{marginTop: '15px'}}>
       <Typography variant="h6">Rod length: {isNaN(rodSettings._rodLength) ? 0 : rodSettings._rodLength} m</Typography>
       <TextField
         label="Input new length"
@@ -56,32 +58,32 @@ const RodComponent = observer(() => {
             style={{
               height: '20px',
               width: '100px', 
-              backgroundColor: 'blue', 
-              margin: '2px 5px',
+              backgroundColor: theme.palette.primary.main,
+              marginTop: '7px'
             }}
           />
           ))}
       </Box>
       
       <Box>
-      <Box display={'flex'} gap={'20px'}>
+      <Box display={'flex'} gap={'20px'} marginTop={'15px'}>
         <Typography variant='h6'>Add price for each length</Typography>
         <Fab size="small" color="secondary" aria-label="add" onClick={addLength}>
           <AddIcon/>
         </Fab>
       </Box>
       {lengths.map((item, index) => (
-        <Box key={index}>
+        <Box key={index} > 
           <Box
             style={{
               height: '20px',
               width: `${100 * item.length}px`, 
-              backgroundColor: 'blue', 
-              margin: '2px 5px',
+              backgroundColor: theme.palette.primary.main, 
+              margin: '10px 5px',
             }}
           />   
           <TextField
-            label="Input new length"
+            label={`Input price for length ${index+1}`}
             type="number"
             style={{marginTop: '10px'}}
             value={item.price}
