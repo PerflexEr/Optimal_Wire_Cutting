@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { Container } from '@mui/material';
+import RodComponent from '../components/Rod';
+
 const MainPage = () => {
   return (
-    <div>
-      main
-    </div>
+    <Container>
+      <RodComponent/>
+    </Container>
   );
 };
 
