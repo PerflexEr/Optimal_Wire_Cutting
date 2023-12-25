@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { TextField, Typography,Fab , Box } from '@mui/material';
+import { TextField, Typography,Fab , Box , Button} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { observer } from 'mobx-react-lite';
 import { Context } from "../index";
+import cut from '../services/wireCuttingFunc';
 
 const RodComponent = observer(() => {
   const {rodSettings} = useContext(Context)
@@ -29,6 +30,14 @@ const RodComponent = observer(() => {
     newLengths[index].price = event.target.value;
     setLengths(newLengths);
   };
+
+  const handleCutting = () => {
+    const prices = Object.values(rodSettings._rodPrice);
+    const result = cut(rodSettings._rodLength, prices);
+    console.log(`Maximum profit for rod of length ${rodSettings._rodLength}: ${result.maxProfit}`);
+    console.log(`The rod was cut into lengths of: ${result.lengths.join(", ")}`);
+  };
+
 
   return (
     <Box>
@@ -81,6 +90,7 @@ const RodComponent = observer(() => {
         </Box>
         ))}
       </Box>
+      <Button variant="contained" style={{marginTop: "20px"}} onClick={handleCutting}>Count optimal cutting</Button>
     </Box>
   );
 });
