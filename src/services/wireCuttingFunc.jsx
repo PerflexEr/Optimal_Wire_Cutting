@@ -19,8 +19,20 @@ function cut(n, prices) {
         n = n - cuts[n];
     }
 
-    return { maxProfit: results[results.length - 1], lengths: lengths };
+    let decisionTree = buildDecisionTree(lengths);
+
+    return { maxProfit: results[results.length - 1], lengths: lengths, decisionTree: decisionTree };
 }
 
-export default cut
+function buildDecisionTree(lengths) {
+    if (lengths.length === 0) {
+        return null;
+    }
 
+    let name = lengths[0].toString();
+    let children = buildDecisionTree(lengths.slice(1));
+
+    return { name: name, children: children };
+}
+
+export default cut;

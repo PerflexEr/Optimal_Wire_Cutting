@@ -37,7 +37,11 @@ const RodComponent = observer(() => {
     
     console.log(`Maximum profit for rod of length ${rodSettings._rodLength}: ${result.maxProfit}`);
     console.log(`The rod was cut into lengths of: ${result.lengths.join(", ")}`);
+    console.log(`Decision tree: `, result.decisionTree); 
+
+    rodSettings.setDecisionTree(result.decisionTree); 
   };
+
 
   const theme = useTheme();
 
