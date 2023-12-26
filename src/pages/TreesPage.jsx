@@ -5,6 +5,7 @@ import Visualizer from "../components/Visualizer/Visualizer";
 import BinaryTree from "./../lib/tree";
 import animateNodeInTree from "./../lib/animateNodeInTree";
 
+import { Container } from "@mui/material";
 
 class App extends Component {
   constructor(props) {
@@ -50,13 +51,13 @@ class App extends Component {
   componentDidMount() {
     this.tree.insert("23", "left");
     this.tree.insert("92", "right");
-    this.tree.insertAt("23", "12", "left"); // Api to insert a node at a specific node
+    this.tree.insertAt("23", "12", "left"); 
     this.tree.insertAt("23", "04", "right");
     this.tree.insertAt("04", "16", "left");
     this.tree.insertAt("04", "09", "right");
   }
 
-  delayList() { // Render the list of traversed node with some delay to appear animated
+  delayList() { 
     const { traversedList } = this.state; 
     traversedList.forEach((listItem, index) => {
       setTimeout(() => {
@@ -66,7 +67,7 @@ class App extends Component {
     });
   }
 
-  updateTree(node) { // Update the data provided to the tree diagram (changes color of the current node being traversed)
+  updateTree(node) { 
     const { data } = this.state;
     if (data.name === String(node)) {
       data.circleProps = { fill: "red" };
@@ -83,7 +84,7 @@ class App extends Component {
     });
   }
 
-  animate() { // Perform selected traversal and trigger animation
+  animate() { 
     const { selectedTraversal } = this.state;
     if (selectedTraversal.value === "inorder") {
       this.tree.inorder();
@@ -100,7 +101,7 @@ class App extends Component {
     });
   }
 
-  resetTreeDiagram() { // Resets the tree diagram with red nodes back to tree with black nodes
+  resetTreeDiagram() {
     const data = {
       name: "34",
       children: [
@@ -133,10 +134,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="main-container">
+      <Container>
         <Visualizer data={this.state.data} delayedList={this.state.delayedList} />
         <Controls selectedTraversal={this.state.selectedTraversal} handleChange={this.handleChange} />
-      </div>
+      </Container>
     );
   }
 }
