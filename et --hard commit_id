@@ -1,0 +1,53 @@
+[33mcommit 1cd9b1f85d54759597b3fa3bac54d8cefc51157d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Tue Dec 26 18:58:37 2023 +0200
+
+    evrth working)
+
+[33mcommit 68998da6698d55070272dc8b87b0fd7b83387c9e[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Tue Dec 26 18:49:40 2023 +0200
+
+    first version of trees
+
+[33mcommit 2c27e5cb74b54aca39a5dd37e777777a4ec1ea28[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 25 13:59:08 2023 +0200
+
+    navbar added
+
+[33mcommit 7065b7e1d4a043ebef63ef7a286dde7dff1119c1[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 25 13:19:28 2023 +0200
+
+    first prototype rdy
+
+[33mcommit adafe78478edc963936160af62940350b1fc3414[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 25 12:45:53 2023 +0200
+
+    started main section
+
+[33mcommit c1531e6fda012ba0c393a6dff8838fbbd07f9b07[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 11 18:41:18 2023 +0200
+
+    test
+
+[33mcommit 1ad50430308eb474f227a3620e62c2d64bb81b3c[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 11 18:31:47 2023 +0200
+
+    routes created
+
+[33mcommit 02e3ae8521ee175ccf67eeac827aa0b87c2e250a[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 11 15:37:35 2023 +0200
+
+    first commit
+
+[33mcommit 3cfd428248bbde9b33d7a38e96b844f18dc0fdb4[m
+Author: Stepan Sorokin <stepasorokin56@gmail.com>
+Date:   Mon Dec 11 15:30:36 2023 +0200
+
+    Initialize project using Create React App

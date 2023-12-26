@@ -1,23 +1,26 @@
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Box, List, ListItem, ListItemText } from "@mui/material";
+import { useTheme } from "@emotion/react";
 
-import "./TraversedList.css";
+const TraversedList = ({ delayedList }) => {
+  const theme = useTheme(); // Переместите useTheme внутрь компонента
 
-// Renders the list of nodes passed in as props and add transition on enter and exit using React Transition group
-const TraversedList = ({ delayedList }) => (
-  <div className="numbers-container">
-    <ul className="numbers-list">
-      <TransitionGroup component={null}>
-        {delayedList.map((num, index) => (
-          <CSSTransition key={index} timeout={500} classNames="fade">
-            <li className="numbers-list-item" key={index}>
-              {num}
-            </li>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
-    </ul>
-  </div>
-);
+  return (
+    <Box display="flex" justifyContent="center">
+      <List style={{ display: 'flex', flexDirection: 'row' }}>
+        <TransitionGroup component={null}>
+          {delayedList.map((num, index) => (
+            <CSSTransition key={index} timeout={500} classNames="fade">
+              <ListItem>
+                <ListItemText style={{background: `${theme.palette.primary.main}`, padding: '10px' , borderRadius: '10px' , color: 'white'}} primary={num} />
+              </ListItem>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      </List>
+    </Box>
+  );
+};
 
 export default TraversedList;
