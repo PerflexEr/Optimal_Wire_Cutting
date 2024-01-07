@@ -7,7 +7,7 @@ import cut from '../services/wireCuttingFunc';
 
 const RodComponent = observer(() => {
   const {rodSettings} = useContext(Context)
-  console.log(rodSettings);
+  console.log(rodSettings._decisionTree);
   const handleLengthChange = (event) => {
     const newLength = parseFloat(event.target.value);
       if(newLength >= 200){
@@ -30,7 +30,7 @@ const RodComponent = observer(() => {
     newLengths[index].price = event.target.value;
     setLengths(newLengths);
   };
-
+  const [result, setResult] = useState()
   const handleCutting = () => {
     const prices = Object.values(rodSettings._rodPrice);
     const result = cut(rodSettings._rodLength, prices);
@@ -38,10 +38,11 @@ const RodComponent = observer(() => {
     console.log(`Maximum profit for rod of length ${rodSettings._rodLength}: ${result.maxProfit}`);
     console.log(`The rod was cut into lengths of: ${result.lengths.join(", ")}`);
     console.log(`Decision tree: `, result.decisionTree); 
-
-    rodSettings.setDecisionTree(result.decisionTree); 
-  };
-
+    console.log(`Execution time: ${result.executionTime} milliseconds`);
+    setResult(prevResult => ({...prevResult, ...result}))
+    rodSettings.setDecisionTree(result.decisionTree); // сохранение дерева решений в стейт
+  };  
+  
 
   const theme = useTheme();
 
@@ -63,7 +64,8 @@ const RodComponent = observer(() => {
               height: '20px',
               width: '100px', 
               backgroundColor: theme.palette.primary.main,
-              marginTop: '7px'
+              marginTop: '7px',
+              marginLeft: '1px'
             }}
           />
           ))}
@@ -97,8 +99,28 @@ const RodComponent = observer(() => {
         ))}
       </Box>
       <Button variant="contained" style={{marginTop: "20px"}} onClick={handleCutting}>Count optimal cutting</Button>
+      {result && (
+      <Box style={{ marginTop: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+          <Typography variant="h6">Cutting Results:</Typography>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+          <img src="https://cdn-icons-png.flaticon.com/512/3720/3720367.png" alt="Image2" style={{ marginRight: '10px', width: '20px', height: '20px' }} />
+          <Typography>{`Maximum profit for rod of length ${rodSettings._rodLength}: ${result.maxProfit}`}</Typography>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+          <img src="https://www.svgrepo.com/show/403742/kitchen-knife.svg" alt="Image3" style={{ marginRight: '10px', width: '20px', height: '20px' }} />
+          <Typography>{`The rod was cut into lengths of: ${result.lengths.join(", ")}`}</Typography>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="https://cdn-icons-png.flaticon.com/512/2/2306.png" alt="Image4" style={{ marginRight: '10px', width: '20px', height: '20px' }} />
+          <Typography>{`Execution time: ${result.executionTime} milliseconds`}</Typography>
+        </div>
+      </Box>
+    )}
     </Box>
   );
 });
+
 
 export default RodComponent;

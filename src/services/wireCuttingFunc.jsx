@@ -1,4 +1,7 @@
 function cut(n, prices) {
+    // Замеряем время начала выполнения алгоритма
+    const startTime = performance.now();
+
     let results = Array(n + 1).fill(0);
     let cuts = Array(n + 1).fill(0);
 
@@ -21,18 +24,27 @@ function cut(n, prices) {
 
     let decisionTree = buildDecisionTree(lengths);
 
-    return { maxProfit: results[results.length - 1], lengths: lengths, decisionTree: decisionTree };
+    // Замеряем время окончания выполнения алгоритма
+    const endTime = performance.now();
+
+    // Рассчитываем время выполнения в миллисекундах
+    const executionTime = endTime - startTime;
+
+    return { maxProfit: results[results.length - 1], lengths: lengths, decisionTree: decisionTree, executionTime: executionTime };
 }
 
-function buildDecisionTree(lengths) {
+function buildDecisionTree(lengths, index = 0) {
     if (lengths.length === 0) {
         return null;
     }
 
-    let name = lengths[0].toString();
-    let children = buildDecisionTree(lengths.slice(1));
+    const midIndex = Math.floor(lengths.length / 2);
+    const midValue = lengths[midIndex];
 
-    return { name: name, children: children };
+    const leftBranch = buildDecisionTree(lengths.slice(0, midIndex), index * 2 + 1);
+    const rightBranch = buildDecisionTree(lengths.slice(midIndex + 1), index * 2 + 2);
+
+    return { name: midValue.toString(), children: [leftBranch, rightBranch].filter(Boolean), key: index };
 }
 
 export default cut;
